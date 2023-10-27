@@ -66,7 +66,7 @@ def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFra
                             'Comp. TD payée', 'Comp. TQ payée', 'Astr. férié pay.', \
                                 'Astr. repos pay.', 'Astr. travail pay.']]
         
-    return df_output.style.hide()
+    return df_output
 
 
 
@@ -104,7 +104,7 @@ def format_absence_oir(idap_data : pd.DataFrame, control_data : pd.DataFrame) ->
     df__['CODE NPO'] = CODE_NPO
     df__['LABEL'] = ['absence' for k in range(len(df__))]
 
-    return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'CODE NPO', 'DATE FIN NPO', 'HEURE FIN NPO']].style.hide()
+    return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'CODE NPO', 'DATE FIN NPO', 'HEURE FIN NPO']]
 
 
 def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
@@ -125,7 +125,7 @@ def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFr
 
     df_output['Col 2'] = ['RECOPIE_IDAP' for k in range(len(df_output))]
 
-    return df_output[['ID', 'DATE DEBUT NPO', 'CODE NPO', 'Col 1', 'Col 2']].style.hide()
+    return df_output[['ID', 'DATE DEBUT NPO', 'CODE NPO', 'Col 1', 'Col 2']]
 
 
 
@@ -152,7 +152,7 @@ def recuperation__regimes(idap_data : pd.DataFrame, control_data : pd.DataFrame)
 
     df_output['Régime'] = df_output['Régime'].replace(to_replace='FE', value='FJ205').replace(to_replace='FS', value='FJ210')
 
-    return df_output.drop_duplicates()
+    return df_output
 
 
     
