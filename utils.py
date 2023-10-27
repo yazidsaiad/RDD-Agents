@@ -13,7 +13,7 @@ def convert_df(df : pd.DataFrame):
    """
    Converts Dataframe into csv file
    """
-   return df.to_csv(index=False).encode('utf-8')
+   return df.to_csv(index=False, header=False).encode('utf-8')
 
 
 
