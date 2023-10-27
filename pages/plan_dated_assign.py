@@ -54,4 +54,13 @@ def app():
         df_to_save = utils.to_excel(output)
         st.download_button(label="📥 Télécharger au format .xlsx", data=df_to_save, file_name='Plan dated assign IDAP pour SCORE.xlsx')
 
+        csv = utils.convert_df(output)
+        st.download_button(
+            label="📥 Télécharger au format .csv",
+            data=csv,
+            file_name='Récupération des régimes IDAP pour SCORE.csv',
+            mime="text/csv",
+            key='download-csv'
+        )
+
     st.divider()
