@@ -162,7 +162,7 @@ def format_absence_oir(idap_data : pd.DataFrame, control_data : pd.DataFrame) ->
 
     df__ = df__[df__['CODE NPO'].isin(codes_absences)]
 
-    return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'CODE NPO', 'DATE FIN NPO', 'HEURE FIN NPO']]
+    return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'DATE FIN NPO', 'HEURE FIN NPO', 'CODE NPO']]
 
 
 def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
