@@ -69,7 +69,7 @@ def convert_df(df : pd.DataFrame):
    """
    Converts Dataframe into csv file
    """
-   return df.to_csv(index=False, header=False).encode('utf-8-sig')
+   return df.to_csv(index=False, header=False, sep=';').encode('utf-8-sig')
 
 
 
