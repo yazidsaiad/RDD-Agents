@@ -58,7 +58,7 @@ def app():
         st.download_button(
             label="📥 Télécharger au format .csv",
             data=csv,
-            file_name='Récupération des régimes IDAP pour SCORE.csv',
+            file_name='Récupération des choix IDAP pour SCORE.csv',
             mime="text/csv",
             key='download-csv'
         )

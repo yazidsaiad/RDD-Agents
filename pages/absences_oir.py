@@ -52,13 +52,13 @@ def app():
         st.divider()
         st.markdown("<h1 style='text-align: center; color: black; font-size : 20px;'>Téléchargement du fichier généré</h1>", unsafe_allow_html=True)
         df_to_save = utils.to_excel(output)
-        st.download_button(label="📥 Télécharger au format .xlsx", data=df_to_save, file_name='Récupération des absences IDAP pour SCORE.xlsx')
+        st.download_button(label="📥 Télécharger au format .xlsx", data=df_to_save, file_name='Récupération des Absences IDAP pour SCORE.xlsx')
 
         csv = utils.convert_df(output)
         st.download_button(
             label="📥 Télécharger au format .csv",
             data=csv,
-            file_name='Récupération des régimes IDAP pour SCORE.csv',
+            file_name='Récupération des Absences IDAP pour SCORE.csv',
             mime="text/csv",
             key='download-csv'
         )
