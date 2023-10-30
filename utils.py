@@ -7,8 +7,64 @@ from io import BytesIO
 import datetime
 import streamlit as st
 
+codes_absences = [
+    'AG',
+    'AM',
+    'AN',
+    'AY',
+    'AZ',
+    'BA',
+    'BG',
+    'BI',
+    'BLD',
+    'BM',
+    'BT',
+    'CA',
+    'CI',
+    'CISS',
+    'CJ',
+    'CK',
+    'CM',
+    'DA',
+    'DB',
+    'DC',
+    'EBR',
+    'HA',
+    'HH',
+    'HK',
+    'HN',
+    'LE',
+    'MA',
+    'MB',
+    'MS',
+    'SA',
+    'SG',
+    'SI',
+    'SK',
+    'SL',
+    'SN',
+    'SO',
+    'SP',
+    'SS',
+    'SY',
+    'UM',
+    'US',
+    'UX',
+    'YC',
+    'YD',
+    'YE',
+    'YH',
+    'YS',
+    'ZA',
+    'ZE',
+    'ZF',
+    'ZN',
+    'ZT',
+    '½CA',
+    'RE']
 
-@st.experimental_memo
+
+@st.cache_data
 def convert_df(df : pd.DataFrame):
    """
    Converts Dataframe into csv file
@@ -104,6 +160,8 @@ def format_absence_oir(idap_data : pd.DataFrame, control_data : pd.DataFrame) ->
     df__['CODE NPO'] = CODE_NPO
     df__['LABEL'] = ['absence' for k in range(len(df__))]
 
+    df__ = df__[df__['CODE NPO'].isin(codes_absences)]
+
     return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'CODE NPO', 'DATE FIN NPO', 'HEURE FIN NPO']]
 
 
@@ -125,7 +183,9 @@ def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFr
 
     df_output['Col 2'] = ['RECOPIE_IDAP' for k in range(len(df_output))]
 
-    return df_output[['ID', 'DATE DEBUT NPO', 'CODE NPO', 'Col 1', 'Col 2']]
+    df_output = df_output[df_output['CODE NPO'].isin(['RP', 'RU', 'VT', 'VC', 'RH'])]
+
+    return df_output[['LABEL', 'ID', 'DATE DEBUT NPO', 'CODE NPO', 'Col 1', 'Col 2']]
 
 
 
