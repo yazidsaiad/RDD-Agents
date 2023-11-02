@@ -27,7 +27,7 @@ def app():
     df_idap = pd.DataFrame()
     df_control = pd.DataFrame()
     if file_idap is not None and file_control is not None:
-        df_idap = pd.read_excel(file_idap, header=None)
+        df_idap = pd.read_excel(file_idap)
         df_control = pd.read_excel(file_control, header=None)
 
     st.divider()
