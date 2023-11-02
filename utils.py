@@ -95,16 +95,17 @@ def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFra
     """
 
     # idap_data = idap_data.rename(columns={'CODE IMMATRICULATION':'ID'})
-    control_data = control_data.rename(columns={control_data.columns[0]:'ID'})
+    control_data = control_data.rename(columns={control_data.columns[0]:'ID', 
+                                                control_data.columns[1]:'Date de début',
+                                                control_data.columns[2]: 'Date de fin'})
+    
     df_output = pd.concat([control_data, idap_data], axis=1, join="inner")
 
     df_output = df_output.rename(columns={'PAIE HEURES SUPP':'Comp. TK payée',\
                               'PAIE DEPASSEMENTS': 'Comp. TD payée',\
                                 'PAIE PRESENCES' : 'Astr. travail pay.',\
                                     'PAIE REPOS' : 'Astr. repos pay.',\
-                                          'PAIE FERIES' : 'Astr. férié pay.',\
-                                            control_data.columns[1]: 'Date de début',\
-                                                control_data.columns[2]: 'Date de fin'})
+                                          'PAIE FERIES' : 'Astr. férié pay.'})
     
     df_output['Comp. TQ payée'] = df_output['Comp. TD payée']
 
@@ -192,13 +193,11 @@ def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFr
 def recuperation__regimes(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
     """
     """
-    control_data = control_data.rename(columns={control_data.columns[0]:'ID'})
-
-    df_output = pd.concat([control_data, idap_data], axis=1, join="inner")
-
-    df_output = df_output.rename(columns={control_data.columns[1]: 'Date de début',\
-                                          control_data.columns[2]: 'Date de fin'})
+    control_data = control_data.rename(columns={control_data.columns[0]:'ID', 
+                                                control_data.columns[1]:'Date de début',
+                                                control_data.columns[2]: 'Date de fin'})
     
+    df_output = pd.concat([control_data, idap_data], axis=1, join="inner")
 
     df_output['Date de début'] = [datetime.datetime.strftime(list(df_output['Date de début'])[k], "%d/%m/%Y") \
                                   for k in range(len(df_output))]
