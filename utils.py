@@ -59,10 +59,10 @@ def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFra
     
     df_output['Comp. TQ payée'] = df_output['Comp. TD payée']
 
-    df_output['Date de début'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de début'])[k], "%Y%m%d"), "%d/%m/%Y") \
+    df_output['Date de début'] = [datetime.datetime.strftime(list(df_output['Date de début'])[k], "%d/%m/%Y") \
                                   for k in range(len(df_output))]
     
-    df_output['Date de fin'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de fin'])[k], "%Y%m%d"), "%d/%m/%Y") \
+    df_output['Date de fin'] = [datetime.datetime.strftime(list(df_output['Date de fin'])[k], "%d/%m/%Y") \
                                   for k in range(len(df_output))]
     
     df_output = df_output.replace(to_replace='OUI', value=1).replace(to_replace='NON', value=0)
