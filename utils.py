@@ -18,8 +18,7 @@ def convert_df(df : pd.DataFrame):
    return df.to_csv(index=False, header=False, sep=';').encode('utf-8-sig')
 
 
-
-
+@st.cache_data
 def to_excel(df: pd.DataFrame):
     """
     This function converts a pandas dataframe to an excel file.
@@ -33,7 +32,7 @@ def to_excel(df: pd.DataFrame):
     return in_memory_fp.read()
 
 
-
+@st.cache_data
 def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
     """
     Ce script permet de transcrire les informations d'IDAP contenues dans le tableau adap_data
@@ -77,7 +76,7 @@ def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFra
     return df_output
 
 
-
+@st.cache_data
 def format_absence_oir(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
     """
     Récupération des absences.
@@ -117,6 +116,7 @@ def format_absence_oir(idap_data : pd.DataFrame, control_data : pd.DataFrame) ->
     return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'DATE FIN NPO', 'HEURE FIN NPO', 'CODE NPO']]
 
 
+@st.cache_data
 def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
     """
     """
@@ -140,7 +140,7 @@ def format_plan_date_assigned(idap_data : pd.DataFrame, control_data : pd.DataFr
     return df_output[['LABEL', 'ID', 'DATE DEBUT NPO', 'CODE NPO', 'Col 1', 'Col 2']]
 
 
-
+@st.cache_data
 def recuperation__regimes(idap_data : pd.DataFrame, control_data : pd.DataFrame) -> pd.DataFrame:
     """
     """
