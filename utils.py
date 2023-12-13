@@ -6,62 +6,8 @@ import pandas as pd
 from io import BytesIO
 import datetime
 import streamlit as st
+import const
 
-codes_absences = [
-    'AG',
-    'AM',
-    'AN',
-    'AY',
-    'AZ',
-    'BA',
-    'BG',
-    'BI',
-    'BLD',
-    'BM',
-    'BT',
-    'CA',
-    'CI',
-    'CISS',
-    'CJ',
-    'CK',
-    'CM',
-    'DA',
-    'DB',
-    'DC',
-    'EBR',
-    'HA',
-    'HH',
-    'HK',
-    'HN',
-    'LE',
-    'MA',
-    'MB',
-    'MS',
-    'SA',
-    'SG',
-    'SI',
-    'SK',
-    'SL',
-    'SN',
-    'SO',
-    'SP',
-    'SS',
-    'SY',
-    'UM',
-    'US',
-    'UX',
-    'YC',
-    'YD',
-    'YE',
-    'YH',
-    'YS',
-    'ZA',
-    'ZE',
-    'ZF',
-    'ZN',
-    'ZT',
-    '½CA',
-    'RE']
 
 
 @st.cache_data
@@ -99,6 +45,11 @@ def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFra
                                                 control_data.columns[1]:'Date de début',
                                                 control_data.columns[2]: 'Date de fin'})
     
+    control_data['Date de début'] = pd.to_datetime(control_data['Date de début'])
+    control_data['Date de fin'] = pd.to_datetime(control_data['Date de fin'])
+
+    print(type(list(control_data['Date de début'])[0]))
+
     df_output = pd.concat([control_data, idap_data], axis=1, join="inner")
 
     df_output = df_output.rename(columns={'PAIE HEURES SUPP':'Comp. TK payée',\
@@ -109,10 +60,10 @@ def recuperation__des__choix(idap_data : pd.DataFrame, control_data : pd.DataFra
     
     df_output['Comp. TQ payée'] = df_output['Comp. TD payée']
 
-    df_output['Date de début'] = [datetime.datetime.strftime(list(df_output['Date de début'])[k], "%d/%m/%Y") \
+    df_output['Date de début'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de début'])[k], "%Y%m%d"), "%d/%m/%Y") \
                                   for k in range(len(df_output))]
     
-    df_output['Date de fin'] = [datetime.datetime.strftime(list(df_output['Date de fin'])[k], "%d/%m/%Y") \
+    df_output['Date de fin'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de fin'])[k], "%Y%m%d"), "%d/%m/%Y") \
                                   for k in range(len(df_output))]
     
     df_output = df_output.replace(to_replace='OUI', value=1).replace(to_replace='NON', value=0)
@@ -161,7 +112,7 @@ def format_absence_oir(idap_data : pd.DataFrame, control_data : pd.DataFrame) ->
     df__['CODE NPO'] = CODE_NPO
     df__['LABEL'] = ['absence' for k in range(len(df__))]
 
-    df__ = df__[df__['CODE NPO'].isin(codes_absences)]
+    df__ = df__[df__['CODE NPO'].isin(const.codes_absences)]
 
     return df__[['LABEL', 'ID', 'DATE DEBUT NPO', 'HEURE DEBUT NPO', 'DATE FIN NPO', 'HEURE FIN NPO', 'CODE NPO']]
 
