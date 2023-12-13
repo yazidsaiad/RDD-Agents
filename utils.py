@@ -150,15 +150,15 @@ def recuperation__regimes(idap_data : pd.DataFrame, control_data : pd.DataFrame)
     
     df_output = pd.concat([control_data, idap_data], axis=1, join="inner")
 
-    #df_output['Date de début'] = [datetime.datetime.strftime(list(df_output['Date de début'])[k], "%d/%m/%Y") \
-    #                              for k in range(len(df_output))]
-    df_output['Date de début'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de début'])[k], "%d/%m/%Y"), "%d/%m/%Y") \
+    df_output['Date de début'] = [datetime.datetime.strftime(list(df_output['Date de début'])[k], "%d/%m/%Y") \
                                   for k in range(len(df_output))]
+    #df_output['Date de début'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de début'])[k], "%d/%m/%Y"), "%d/%m/%Y") \
+    #                              for k in range(len(df_output))]
 
-    #df_output['Date de fin'] = [datetime.datetime.strftime(list(df_output['Date de fin'])[k], "%d/%m/%Y") \
-    #                              for k in range(len(df_output))]
-    df_output['Date de fin'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de fin'])[k], "%d/%m/%Y"), "%d/%m/%Y") \
+    df_output['Date de fin'] = [datetime.datetime.strftime(list(df_output['Date de fin'])[k], "%d/%m/%Y") \
                                   for k in range(len(df_output))]
+    #df_output['Date de fin'] = [datetime.datetime.strftime(datetime.datetime.strptime(list(df_output['Date de fin'])[k], "%d/%m/%Y"), "%d/%m/%Y") \
+    #                              for k in range(len(df_output))]
     
     df_output['LABEL'] = ['empbook' for k in range(len(df_output))]
     
